@@ -1,9 +1,6 @@
 # flutter-test
 flutter test for hackathon
 
+# packages
 
-# installing checklist
-
-- android studio
-- flutter for vscode extension
-- flutter sdk
+- http (flutter pub add http)
