@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'anycode official not a scam website'),
     );
   }
 }
@@ -106,20 +106,22 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'click the anycode logo to donate \$1 to the anycode student clubs\'s bank account',
+              textAlign: TextAlign.center,
             ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
+              textAlign: TextAlign.center,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
+        child: Image(image: AssetImage('anycode_logo.png')),
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+      );
   }
 }
