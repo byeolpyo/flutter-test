@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "943243707608",
+    "project_id": "test-flutter-hackathon",
+    "storage_bucket": "test-flutter-hackathon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943243707608:android:e30c52a65ebe2de13d03ad",
+        "android_client_info": {
+          "package_name": "com.example.flutter_test_test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw7F6YDad6qXHWCYHuM6CzWFozvQkjHKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

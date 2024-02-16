@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  // Initialize Firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // Run your app
   runApp(const MyApp());
 }
 
@@ -123,6 +132,6 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Image(image: AssetImage('anycode_logo.png')),
       ), // This trailing comma makes auto-formatting nicer for build methods.
-      );
+    );
   }
 }
