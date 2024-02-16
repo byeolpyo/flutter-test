@@ -66,61 +66,38 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool is_counter_enabled = true;
 
   void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+    if(is_counter_enabled) {
+      setState(() {
+        _counter++;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const Text(
+              'click the toggle to toggle donations',
+              textAlign: TextAlign.center,
+            ),
+            buildSwitch(),
             const Text(
               'click the anycode logo to donate \$1 to the anycode student clubs\'s bank account',
               textAlign: TextAlign.center,
             ),
             Text(
-              '$_counter',
+              '\$$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
               textAlign: TextAlign.center,
             ),
@@ -132,6 +109,76 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Image(image: AssetImage('anycode_logo.png')),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+    Widget buildSwitch() => Transform.scale(
+        scale: 1,
+        child: Switch(
+           activeColor: Colors.blueAccent,
+           activeTrackColor: Colors.blue.withOpacity(0.4),
+           inactiveThumbColor: Colors.grey,
+           inactiveTrackColor: Colors.white10,
+          value: is_counter_enabled,
+          onChanged: (value) => setState(() => is_counter_enabled = value),
+        ),
+      );
+}
+
+class SwitchExample extends StatefulWidget {
+  const SwitchExample(onChanged, {super.key});
+
+  @override
+  State<SwitchExample> createState() => _SwitchExampleState();
+}
+
+class _SwitchExampleState extends State<SwitchExample> {
+  bool light = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final MaterialStateProperty<Color?> trackColor =
+        MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        // Track color when the switch is selected.
+        if (states.contains(MaterialState.selected)) { 
+          return Colors.purple;
+        }
+        // Otherwise return null to set default track color
+        // for remaining states such as when the switch is
+        // hovered, focused, or disabled.
+        return null;
+      },
+    );
+    final MaterialStateProperty<Color?> overlayColor =
+        MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        // Material color when switch is selected.
+        if (states.contains(MaterialState.selected)) {
+          return Colors.purple.withOpacity(0.54);
+        }
+        // Material color when switch is disabled.
+        if (states.contains(MaterialState.disabled)) {
+          return Colors.grey.shade400;
+        }
+        // Otherwise return null to set default material color
+        // for remaining states such as when the switch is
+        // hovered, or focused.
+        return null;
+      },
+    );
+
+    return Switch(
+      // This bool value toggles the switch.
+      value: light,
+      overlayColor: overlayColor,
+      trackColor: trackColor,
+      thumbColor: const MaterialStatePropertyAll<Color>(Colors.black),
+      onChanged: (bool value) {
+        // This is called when the user toggles the switch.
+        setState(() {
+          light = value;
+        });
+      },
     );
   }
 }
